@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sen Chicken - Vente de poules et poulets de qualité au Sénégal</title>
+    <meta name="description" content="Sen Chicken - Élevage de volailles bio au Sénégal. Poulets fermiers, poules pondeuses et œufs frais livrés à Dakar et dans tout le pays.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles personnalisés */
+        :root {
+            --primary-color: #8B4513; /* Marron */
+            --secondary-color: #F5DEB3; /* Beige */
+            --accent-color: #FFD700; /* Or pour les accents */
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 0;
+        }
+        
+        .promo-banner {
+            font-size: 0.9rem;
+            background-color: var(--accent-color) !important;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+    background:  linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/poulp.jpg') no-repeat center center/cover;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 150px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .feature-box:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: #A0522D;
+            border-color: #A0522D;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: var(--primary-color) !important;
+            color: white;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Animation pour le panier */
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .cart-count {
+            animation: bounce 0.5s;
+        }
+        
+        /* Section produits mise en avant */
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de promotion -->
+    <div class="promo-banner bg-warning text-center py-2">
+        <p class="mb-0 fw-bold">Livraison offerte à Dakar pour toute commande supérieure à 20 000 FCFA ! <a href="produits.html" class="text-decoration-underline ms-2">Voir nos produits</a></p>
+    </div>
+
+    <!-- Navigation améliorée -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <i class="fas fa-egg me-2"></i>Sen Chicken
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active mx-2" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="produits.html">Nos Produits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#apropos">À Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#panier">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-light text-dark cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section avec image de fond améliorée -->
+    <section class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 fw-bold mb-4">Volailles fermières 100% sénégalaises</h1>
+                    <p class="lead mb-5">Élevées en plein air avec des méthodes traditionnelles pour une qualité exceptionnelle</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="produits.html" class="btn btn-primary btn-lg px-4">Nos Produits</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg px-4">Nous Contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À Propos ajoutée -->
+    <section id="apropos" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-4">Notre Engagement Qualité</h2>
+                    <p class="lead">Depuis 2015, Sen Chicken s'engage à fournir des volailles de la meilleure qualité, élevées dans le respect des traditions sénégalaises.</p>
+                    <p>Nos poulets sont nourris avec des aliments naturels, sans antibiotiques ni hormones de croissance. Nous privilégions un élevage en plein air qui garantit une chair ferme et savoureuse.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Élevage traditionnel</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Alimentation naturelle</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Bien-être animal</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Traçabilité garantie</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/poulp.jpg" class="card-img-top product-img" alt="Poulet Label Rouge">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section améliorée -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Pourquoi choisir Sen Chicken ?</h2>
+                <p class="lead text-muted">Découvrez ce qui fait la différence</p>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box p-4 h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Élevage Bio</h3>
+                        <p class="text-muted">Nos volailles sont élevées en plein air avec une alimentation 100% naturelle, sans produits chimiques.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box p-4 h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Qualité Certifiée</h3>
+                        <p class="text-muted">Certification qualité par le Ministère de l'Élevage. Viande tendre et savoureuse garantie.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box p-4 h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Livraison Express</h3>
+                        <p class="text-muted">Livraison sous 24h à Saint_Louis et dans les principales villes du Sénégal. Fraîcheur garantie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Section Témoignages ajoutée -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Ce que disent nos clients</h2>
+                <p class="lead text-muted">Ils ont essayé, ils recommandent</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <!--<img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle mb-3" width="80" alt="Client">  -->
+                            <h5 class="card-title">Aïssatou Niang</h5>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Les poulets Sen Chicken ont une saveur incomparable. Depuis que j'ai découvert cette ferme, je ne prends plus mes volailles ailleurs."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                          <!--  <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle mb-3" width="80" alt="Client"> -->
+                            <h5 class="card-title">Mouhamed Kane</h5>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Livraison rapide et poulets toujours frais. Je commande chaque semaine pour mon restaurant et mes clients adorent!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <!-- <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle mb-3" width="80" alt="Client"> -->
+                            <h5 class="card-title">Fatou Ndiaye</h5>
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">"Les œufs sont toujours frais et les poules pondeuses très productives. Service client très professionnel."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact améliorée -->
+    <section id="contact" class="py-5 bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="fw-bold">Contactez-nous</h2>
+                    <p class="lead text-muted">Une question ? Une commande spéciale ? Nous sommes à votre écoute.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Informations de contact</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-map-marker-alt me-3 text-primary"></i>
+                                    <span>Rue 10, Boudiouck, Saint_Louis, Sénégal</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-phone me-3 text-primary"></i>
+                                    <span>+221 78 197 08 44 / +221 33 987 65 43</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-envelope me-3 text-primary"></i>
+                                    <span>senchicken@gmail.com</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-clock me-3 text-primary"></i>
+                                    <span>Lun-Sam: 8h-19h</span>
+                                </li>
+                            </ul>
+                            <hr class="my-4">
+                            <h5 class="mb-3">Suivez-nous</h5>
+                            <div>
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Envoyez-nous un message</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom complet *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Sujet</label>
+                                    <select class="form-select" id="subject">
+                                        <option>Question sur les produits</option>
+                                        <option>Commande spéciale</option>
+                                        <option>Livraison</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2">Envoyer le message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer amélioré -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Sen Chicken</h5>
+                    <p>Leader dans la vente de volailles de qualité au Sénégal. Notre engagement : qualité, fraîcheur et service irréprochable.</p>
+                    <img src="https://via.placeholder.com/150x50?text=LOGO" alt="Sen Chicken Logo" class="img-fluid" style="max-width: 150px;">
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Liens utiles</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white">Accueil</a></li>
+                        <li class="mb-2"><a href="produits.html" class="text-white">Nos Produits</a></li>
+                        <li class="mb-2"><a href="#apropos" class="text-white">À Propos</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white">Contact</a></li>
+                       <!--  <li class="mb-2"><a href="#" class="text-white">FAQ</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Horaires</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Lundi - Vendredi: 8h - 19h</li>
+                        <li class="mb-2">Samedi: 9h - 18h</li>
+                        <li class="mb-2">Dimanche: Fermé</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-uppercase mb-4">Newsletter</h5>
+                    <p>Abonnez-vous pour recevoir nos offres spéciales</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Votre email">
+                        <button class="btn btn-primary" type="button">S'abonner</button>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 small">&copy; 2023 Sen Chicken. Tous droits réservés.</p>
+                </div>
+               <!-- <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#" class="text-white small">Mentions légales</a></li>
+                        <li class="list-inline-item"><span class="mx-2">•</span></li>
+                        <li class="list-inline-item"><a href="#" class="text-white small">CGV</a></li>
+                        <li class="list-inline-item"><span class="mx-2">•</span></li>
+                        <li class="list-inline-item"><a href="#" class="text-white small">Politique de confidentialité</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Compteur de panier amélioré
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const countElement = document.querySelector('.cart-count');
+                let count = parseInt(countElement.textContent) || 0;
+                count++;
+                countElement.textContent = count;
+                
+                // Animation feedback améliorée
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check-circle"></i> Ajouté';
+                this.classList.add('btn-success');
+                this.classList.remove('btn-primary');
+                
+                // Animation bounce pour l'icône panier
+                const cartIcon = document.querySelector('.fa-shopping-cart');
+                cartIcon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cartIcon.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Réinitialisation après 2 secondes
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-success');
+                }, 2000);
+            });
+        });
+        
+        // Animation au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureBoxes = document.querySelectorAll('.feature-box');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureBoxes.forEach(box => {
+                box.style.opacity = 0;
+                box.style.transform = 'translateY(20px)';
+                box.style.transition = 'all 0.6s ease';
+                observer.observe(box);
+            });
+        });
+    </script>
+</body>
+</html>
