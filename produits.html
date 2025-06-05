@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Volailles - Poulailler Express</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .product-card {
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .price-tag {
+            font-size: 1.2rem;
+            color: #8B4513;
+            font-weight: bold;
+        }
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        .cart-item-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ffc107;
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation simplifiée -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-egg me-2"></i>Sen Chicken
+            </a>
+            <div class="d-flex align-items-center">
+                <a class="nav-link text-white me-3" href="index.html#contact">
+                    <i class="fas fa-phone me-1"></i>
+                </a>
+                <a class="nav-link text-white position-relative" href="#" id="cartDropdown" data-bs-toggle="dropdown">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-item-count" id="cartCount">0</span>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active mx-2" href="index.html">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="produits.html">Nos Produits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="#apropos">À Propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="#contact">Contact</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- Dropdown du panier -->
+                <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdown" style="min-width: 300px;">
+                    <h6 class="dropdown-header">Votre Panier</h6>
+                    <div id="cartItems">
+                        <p class="text-muted mb-0 small">Votre panier est vide</p>
+                    </div>
+                    <hr class="my-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Total:</span>
+                        <span id="cartTotal">0 FCFA</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm w-100" id="checkoutBtn">Commander</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast pour notification -->
+    <div class="toast-container">
+        <div class="toast align-items-center text-white bg-success" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i> Produit ajouté au panier !
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation de commande -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Confirmer votre commande</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="orderSummary">
+                    <!-- Le résumé de la commande sera inséré ici -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmOrder">Confirmer la commande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- En-tête simple -->
+    <header class="bg-light py-4 mb-4">
+        <div class="container text-center">
+            <h1>Nos Volailles</h1>
+            <p class="lead text-muted">Des produits frais et de qualité</p>
+        </div>
+    </header>
+
+    <!-- Section Produits -->
+    <main class="container mb-5">
+        <div class="row g-4">
+            <!-- Poulet Fermier -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="images/poul2.jpg" class="card-img-top product-img" alt="Poulet Fermier">
+                    <div class="card-body">
+                        <h5 class="card-title">Poulet Fermier</h5>
+                        <p class="card-text">
+                            Poulet élevé en plein air, alimentation naturelle.
+                            <br>Poids moyen : 2-2.5kg
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">5 500 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="1" data-name="Poulet Fermier" data-price="5500">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poulet Label Rouge -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="images/poul1.jpg" class="card-img-top product-img" alt="Poulet Label Rouge">
+                    <div class="card-body">
+                        <h5 class="card-title">Poulet Label Rouge</h5>
+                        <p class="card-text">
+                            Qualité supérieure, croissance lente.
+                            <br>Poids moyen : 2.5-3kg
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">6 800 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="2" data-name="Poulet Label Rouge" data-price="6800">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poule Pondeuse -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="images/poulp.jpg" class="card-img-top product-img" alt="Poule Pondeuse">
+                    <div class="card-body">
+                        <h5 class="card-title">Poule Pondeuse</h5>
+                        <p class="card-text">
+                            Production d'œufs frais, race robuste.
+                            <br>Âge : 5-7 mois
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">8 000 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="3" data-name="Poule Pondeuse" data-price="8000">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Œufs Frais -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" class="card-img-top product-img" alt="Œufs Frais">
+                    <div class="card-body">
+                        <h5 class="card-title">Œufs Frais (30 unités)</h5>
+                        <p class="card-text">
+                            Œufs bio de poules élevées en plein air.
+                            <br>Calibre moyen
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">3 000 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="4" data-name="Œufs Frais (30)" data-price="3000">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poulet entier découpé -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="images/poult.jpg" class="card-img-top product-img" alt="Poulet découpé">
+                    <div class="card-body">
+                        <h5 class="card-title">Poulet Découpé</h5>
+                        <p class="card-text">
+                            Poulet fermier prêt à cuisiner.
+                            <br>Morceaux nettoyés et triés
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">6 500 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="5" data-name="Poulet Découpé" data-price="6500">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coq -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card product-card h-100">
+                    <img src="images/poulg.jpg" class="card-img-top product-img" alt="Coq">
+                    <div class="card-body">
+                        <h5 class="card-title">Coq de Chair</h5>
+                        <p class="card-text">
+                            Idéal pour les plats traditionnels.
+                            <br>Poids moyen : 3-3.5kg
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">7 200 FCFA</span>
+                            <button class="btn btn-sm btn-primary add-to-cart" data-id="6" data-name="Coq de Chair" data-price="7200">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Sen Chicken</h5>
+                    <p>Volailles de qualité élevées au Sénégal</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Liens</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Accueil</a></li>
+                        <li><a href="produits.html" class="text-white">Produits</a></li>
+                        <li><a href="index.html#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-phone me-2"></i> +221 78 197 08 44</p>
+                    <p><i class="fas fa-envelope me-2"></i> senchicken@gmail.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Sen Chicken. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialisation des éléments Bootstrap
+        const toastEl = document.getElementById('successToast');
+        const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+        
+        // Panier
+        let cart = [];
+        
+        // Charger le panier depuis le localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartUI();
+            }
+        }
+        
+        // Sauvegarder le panier dans le localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        // Mettre à jour l'interface du panier
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Mettre à jour le compteur
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Mettre à jour la liste des articles
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-muted mb-0 small">Votre panier est vide</p>';
+                cartTotal.textContent = '0 FCFA';
+            } else {
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'd-flex justify-content-between align-items-center mb-2';
+                    itemElement.innerHTML = `
+                        <div>
+                            <h6 class="mb-0">${item.name}</h6>
+                            <small class="text-muted">${item.price} FCFA x ${item.quantity}</small>
+                        </div>
+                        <div>
+                            <span class="fw-bold">${item.price * item.quantity} FCFA</span>
+                        </div>
+                    `;
+                    cartItems.appendChild(itemElement);
+                    
+                    total += item.price * item.quantity;
+                });
+                
+                cartTotal.textContent = `${total} FCFA`;
+            }
+        }
+        
+        // Ajouter un article au panier
+        function addToCart(productId, productName, productPrice) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartUI();
+            
+            // Afficher la notification
+            toast.show();
+            
+            // Animation du bouton
+            const button = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+            button.innerHTML = '<i class="fas fa-check"></i> Ajouté';
+            button.classList.add('btn-success');
+            button.classList.remove('btn-primary');
+            
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-cart-plus"></i> Ajouter';
+                button.classList.add('btn-primary');
+                button.classList.remove('btn-success');
+            }, 2000);
+        }
+        
+        // Gestion des clics sur les boutons "Ajouter au panier"
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                const productName = this.getAttribute('data-name');
+                const productPrice = parseInt(this.getAttribute('data-price'));
+                
+                addToCart(productId, productName, productPrice);
+            });
+        });
+        
+        // Gestion de la commande
+        document.getElementById('checkoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (cart.length === 0) {
+                alert('Votre panier est vide. Ajoutez des produits avant de commander.');
+                return;
+            }
+            
+            const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+            const orderSummary = document.getElementById('orderSummary');
+            
+            // Construire le résumé de la commande
+            let summaryHTML = '<p>Récapitulatif de votre commande :</p><ul class="list-group mb-3">';
+            
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                summaryHTML += `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${item.name} x ${item.quantity}
+                        <span class="badge bg-primary rounded-pill">${itemTotal} FCFA</span>
+                    </li>
+                `;
+            });
+            
+            summaryHTML += `</ul>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total :</span>
+                    <span>${total} FCFA</span>
+                </div>
+                <div class="mt-3">
+                    <p>Où souhaitez-vous être livré ?</p>
+                    <div class="mb-3">
+                        <label for="deliveryAddress" class="form-label">Adresse de livraison</label>
+                        <textarea class="form-control" id="deliveryAddress" rows="2" placeholder="Entrez votre adresse complète"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerPhone" class="form-label">Numéro de téléphone</label>
+                        <input type="tel" class="form-control" id="customerPhone" placeholder="Votre numéro pour la livraison">
+                    </div>
+                </div>
+            `;
+            
+            orderSummary.innerHTML = summaryHTML;
+            orderModal.show();
+        });
+        
+        // Confirmation de la commande
+        document.getElementById('confirmOrder').addEventListener('click', function() {
+            const deliveryAddress = document.getElementById('deliveryAddress').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            
+            if (!deliveryAddress || !customerPhone) {
+                alert('Veuillez remplir tous les champs pour confirmer la commande.');
+                return;
+            }
+            
+            // En production, vous enverriez ici les données à votre serveur
+            console.log('Commande confirmée :', {
+                items: cart,
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                deliveryAddress,
+                customerPhone,
+                date: new Date().toISOString()
+            });
+            
+            // Vider le panier après commande
+            cart = [];
+            saveCart();
+            updateCartUI();
+            
+            // Fermer le modal
+            const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+            orderModal.hide();
+            
+            // Afficher une notification de succès
+            document.querySelector('.toast-body').innerHTML = `
+                <i class="fas fa-check-circle me-2"></i> 
+                Commande confirmée ! Nous vous contacterons au ${customerPhone} pour la livraison à ${deliveryAddress}.
+            `;
+            toast.show();
+        });
+        
+        // Charger le panier au démarrage
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
